@@ -1,0 +1,39 @@
+{
+  "documentSentiment": {
+    "magnitude": 1.0,
+    "score": -0.2
+  },
+  "language": "en",
+  "sentences": [
+    {
+      "sentiment": {
+        "magnitude": 0.1,
+        "score": 0.1
+      },
+      "text": {
+        "beginOffset": 0,
+        "content": "Man, everyone Keeps talking about the #TrumpSlump so it must mean something."
+      }
+    },
+    {
+      "sentiment": {
+        "magnitude": 0.1,
+        "score": -0.1
+      },
+      "text": {
+        "beginOffset": 77,
+        "content": "Like Trump is a Shitty Midas."
+      }
+    },
+    {
+      "sentiment": {
+        "magnitude": 0.7,
+        "score": -0.7
+      },
+      "text": {
+        "beginOffset": 107,
+        "content": "Which would explain why the only reason he kept the economy from tanking was by putting the country into trillion dollar debt."
+      }
+    }
+  ]
+}
