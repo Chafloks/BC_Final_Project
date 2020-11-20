@@ -21,35 +21,38 @@ driver = webdriver.Chrome(path)
 driver.get("https://us.trend-calendar.com/trend/2020-03-01.html")
 time.sleep(2)
 # Gets Trends from trend calendar webpage
-trend_dates = {}
-pageable = True
-counter = 31
-while pageable == True:
-    time.sleep(0.5)
-    contents = driver.find_element_by_class_name("ranking")
-    contents_html = contents.get_attribute("innerHTML")
-    soup = bs(contents_html)
-    anchors = soup.find_all("a")
-    trends = []
-    header = driver.find_element_by_class_name("entry-title")
-    date = header.text.split("on ",1)[1]
-    for a in anchors[:3]:
-        url = a["href"]
-        text = a.text
-        d = {"URL": url, "trends": text}
-        trends.append(d)
-    trend_dates[date] = trends
-    try:
-        submit_button = driver.find_elements_by_class_name("yesterdaytomorrow")[1]
-        pageable = True
-        submit_button.click()
-        counter -= 1
-        if counter == 0:
-            pageable = False
-    except:
-        pageable = False
-collection.insert_one(trend_dates)
+March = []
+March_dict = {}
+for date in trend_dates:
+    trend_dict = {}
+    for trend in trend_dates[date]:
+        driver.get(trend['URL'])
+        time.sleep(1.5)
+        counter = 3
+        text_tweets = []
+        while counter != 0:
+            try:
+                time.sleep(2)
+                contents = driver.find_element_by_class_name("css-1dbjc4n")
+                contents_html = contents.get_attribute("innerHTML")
+                soup = bs(contents_html)
+                tweet_html = soup.find_all("div", {"data-testid":"tweet"})
+                for tweet in tweet_html:
+                    text = tweet.find("div", class_ = "css-901oao r-jwli3a r-1qd0xha r-a023e6 r-16dba41 r-ad9z0x r-bcqeeo r-bnwqim r-qvutc0").get_text()
+                    text_tweets.append(text)
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(4)
+                counter -= 1
+            except:
+                driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(4)
+                counter -= 1
+            trend_dict[trend['trends']] = text_tweets
+        March.append(text_tweets)
+        time.sleep(1)
+    March_dict[date]={"Tweet":trend_dict}
 
+collection2.insert_one(March_dict)
 #Login into Twitter
 driver.get("https://www.twitter.com/login")
 time.sleep(1)
