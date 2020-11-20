@@ -1,12 +1,10 @@
 # BC_Final_Project
  Final Project
+ 
+ Tableau links:
+ https://public.tableau.com/profile/allison.howe8656#!/vizhome/FinalProject_TwitterTrends/TrendDashboard
+ https://public.tableau.com/profile/allison.howe8656#!/vizhome/FinalProject-TweetSentimentinMarch2020/MarchTweetSentimentality
 
-Webscrapping to find top trends by day https://us.trend-calendar.com/trend/2020-01-01.html
+Webscraping to find top trends by day from https://us.trend-calendar.com/trend/2020-01-01.html
 
-then webscrappe twitter.com by trend
 
-save text on Data Base, sql Lite
-
-use NLP Google, to determine sentiment on tweet
-
-Plot stuff
